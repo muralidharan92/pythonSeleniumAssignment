@@ -19,6 +19,8 @@ class BoardPage:
     added_comment_lbl = (By.CSS_SELECTOR,
                          ".js-list-actions.mod-card-back .current-comment.js-friendly-links.js-open-card p")
     updated_list_headers = (By.XPATH, "//div[@class='list js-list-content']//h2")
+    card_popup_close_btn = (By.CSS_SELECTOR, "a[class='icon-md icon-close dialog-close-button js-close-window']")
+    list_add_card_close_btb = (By.CSS_SELECTOR, "a[class='icon-lg icon-close dark-hover js-cancel']")
 
     def add_list_to_board(self, context, list_name):
         """
@@ -62,6 +64,7 @@ class BoardPage:
                     "//div[@class='list-card-details u-clearfix']//textarea"
                     .format(list_name)).send_keys(card_name)
             context.driver.find_element(*self.add_card_btn).click()
+        context.driver.find_element(*self.list_add_card_close_btb).click()
 
     def move_card_to_list(self, context, card_name, from_list, to_list):
         """
@@ -121,7 +124,9 @@ class BoardPage:
         :param context: driver: Browser Instance
         :return: string: return inner HTML string
         """
-        return context.driver.find_element(*self.added_comment_lbl).text
+        output = context.driver.find_element(*self.added_comment_lbl).text
+        context.driver.find_element(*self.card_popup_close_btn).click()
+        return output
 
     def get_list_name(self, context):
         """
