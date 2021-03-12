@@ -1,0 +1,4 @@
+url: "https://trello.com/login"
+decrypt_base_url: "https://encrypterapi.netlify.app/.netlify/functions/api/decrypt/"
+username: "muraleedharan005@gmail.com"
+password: "76aa1cc5e680741e1c2eeba6913e67c4!e8295bfe0b48a334b9f03fb02a77757a"
