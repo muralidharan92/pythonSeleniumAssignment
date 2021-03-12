@@ -1,12 +1,11 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
-
 from features.common.base import Base
 
 
 class BoardPage:
-    list_headers = (By.XPATH, "//div[@class='list js-list-content']//textarea")
-    add_another_list_btn = (By.CSS_SELECTOR, ".open-add-list.js-open-add-list span")
+    list_headers = (By.XPATH, "//div[@class='list-header js-list-header u-clearfix is-menu-shown']//textarea")
+    add_another_list_btn = (By.XPATH, "//span[text()='Add another list']")
     new_list_name_txt = (By.CSS_SELECTOR, "input[name='name']")
     add_new_list_btn = (By.CSS_SELECTOR, "input[value='Add List']")
     add_card_btn = (By.CSS_SELECTOR, "input[value='Add Card']")
@@ -31,8 +30,9 @@ class BoardPage:
         loc_list = context.driver.find_elements(*self.list_headers)
         for index in range(len(list_names)):
             if len(loc_list) == 0 or index > 2:
-                if context.driver.find_element(*self.add_another_list_btn).is_displayed():
+                if not context.driver.find_element(*self.new_list_name_txt).is_displayed():
                     context.driver.find_element(*self.add_another_list_btn).click()
+                context.driver.find_element(*self.new_list_name_txt).clear()
                 context.driver.find_element(*self.new_list_name_txt).send_keys(list_names[index])
                 context.driver.find_element(*self.add_new_list_btn).click()
             else:
@@ -129,7 +129,6 @@ class BoardPage:
         :param context: driver: Browser Instance
         :return: string[]: array of list name
         """
-        # context.driver.refresh()
         Base.wait_for_element_present(context, self.updated_list_headers, 10)
         loc_list = context.driver.find_elements(*self.updated_list_headers)
 

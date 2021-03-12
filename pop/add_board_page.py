@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 from datetime import datetime
-
 from features.common.base import Base
 
 
@@ -36,5 +35,5 @@ class AddBoardPage:
         :param context: driver: Browser Instance
         :return: string: return name of the board
         """
-        Base.wait_for_element_staleness(context, context.driver.find_element(*self.board_name_title_lbl), 10)
+        Base.wait_for_element_staleness(context, context.driver.find_element(*self.board_name_title_lbl), 5)
         return context.driver.find_element(*self.board_name_title_lbl).text

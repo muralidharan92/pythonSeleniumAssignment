@@ -21,7 +21,7 @@ class Base:
         url = config["url"].strip()
         driver.maximize_window()
         driver.get(url)
-        driver.implicitly_wait(15)
+        driver.implicitly_wait(10)
         return driver
 
     @staticmethod
