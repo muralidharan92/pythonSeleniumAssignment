@@ -23,4 +23,3 @@ class LoginPage:
         Base.wait_for_element_staleness(context, context.driver.find_element(*self.password_txt), 10)
         context.driver.find_element(*self.password_txt).send_keys(DecryptUtils.decrypter(config[password]))
         context.driver.find_element(*self.login_btn).click()
-

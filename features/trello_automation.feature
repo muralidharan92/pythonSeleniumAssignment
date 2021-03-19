@@ -7,7 +7,7 @@ Feature: Automating Trello
 
   Scenario: Automate Trello and perform trello functional activities
     When click "Create new board" from board tiles
-    And add board using with visibility "Team Visible"
+    And add board using with visibility "Team visible"
     Then verify board added successfully
     When add list with name of "Not Started,In Progress,QA,Done"
     Then verify "Not Started,In Progress,QA,Done" list added

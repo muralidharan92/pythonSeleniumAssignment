@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 from datetime import datetime
 from features.common.base import Base
@@ -19,13 +21,16 @@ class AddBoardPage:
         time_stamp = datetime.now().strftime("%b-%d-%Y-%H%M%S")
         context.driver.find_element(*self.add_board_title_txt).send_keys("test-board-{}".format(time_stamp))
         current_visibility = context.driver.find_element(*self.visibility_dropdown_btn).text
-        if current_visibility not in visibility:
+        print(current_visibility)
+        print(current_visibility.strip() not in visibility)
+        if current_visibility.strip() != visibility:
             context.driver.find_element(*self.visibility_dropdown_btn).click()
             if visibility == "Private":
                 context.driver.find_element_by_xpath("//span[contains(text(), '{}')]".format(visibility)).click()
             elif visibility == "Public":
                 context.driver.find_element_by_xpath("//span[contains(text(), '{}')]".format(visibility)).click()
                 context.driver.find_element(*self.yes_make_board_public_btn).click()
+        time.sleep(2)
         context.driver.find_element(*self.create_board_btn).click()
         return "test-board-{}".format(time_stamp)
 
